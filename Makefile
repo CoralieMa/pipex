@@ -6,7 +6,7 @@
 #    By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/01 11:14:48 by cmartino          #+#    #+#              #
-#    Updated: 2023/03/07 09:51:29 by cmartino         ###   ########.fr        #
+#    Updated: 2023/03/15 14:53:56 by cmartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ FILES		= main \
 				ft_utils \
 				ft_cmds \
 				ft_exit \
-				ft_path
+				ft_path \
+				ft_init
 
 SRCS		= ${addprefix SRCS/, $(addsuffix .c, $(FILES))}
 
