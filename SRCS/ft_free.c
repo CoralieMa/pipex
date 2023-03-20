@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 14:25:49 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/20 12:11:26 by cmartino         ###   ########.fr       */
+/*   Created: 2023/03/17 15:21:02 by cmartino          #+#    #+#             */
+/*   Updated: 2023/03/17 15:43:48 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-t_pipex	ft_init(void)
+void	ft_free(t_pipex data)
 {
-	t_pipex	data;
-
-	data.paths = NULL;
-	data.cmd = ft_calloc(sizeof(data.cmd), 3);
-	data.flags = ft_calloc(sizeof(data.flags), 3);
-	if (!data.cmd || !data.flags)
-		exit(0);
-	return (data);
+	ft_free_all(data.paths, ft_len_tab(data.paths));
+	// ft_free_all(data.flags, ft_len_tab(data.flags));
+	ft_free_all(data.cmd, ft_len_tab(data.cmd));
 }

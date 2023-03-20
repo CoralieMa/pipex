@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   ft_flags.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 14:25:49 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/20 12:11:26 by cmartino         ###   ########.fr       */
+/*   Created: 2023/03/16 13:14:04 by cmartino          #+#    #+#             */
+/*   Updated: 2023/03/17 15:01:38 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-t_pipex	ft_init(void)
+char	*ft_get_flags(char *tab)
 {
-	t_pipex	data;
+	int	i;
 
-	data.paths = NULL;
-	data.cmd = ft_calloc(sizeof(data.cmd), 3);
-	data.flags = ft_calloc(sizeof(data.flags), 3);
-	if (!data.cmd || !data.flags)
-		exit(0);
-	return (data);
+	i = 0;
+	while (tab[i] != ' ' && tab[i])
+		++i;
+	while (tab[i] == ' ' && tab[i])
+		++i;
+	if (tab[i])
+		return (&tab[i]);
+	return (NULL);
 }

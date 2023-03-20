@@ -6,7 +6,7 @@
 #    By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/01 11:14:48 by cmartino          #+#    #+#              #
-#    Updated: 2023/03/15 14:53:56 by cmartino         ###   ########.fr        #
+#    Updated: 2023/03/17 15:24:47 by cmartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ NAME 		= pipex
 
 FILES		= main \
 				ft_utils \
+				ft_flags \
 				ft_cmds \
 				ft_exit \
 				ft_path \
-				ft_init
+				ft_init \
+				ft_free
 
 SRCS		= ${addprefix SRCS/, $(addsuffix .c, $(FILES))}
 

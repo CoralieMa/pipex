@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:50:50 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/02 14:53:16 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/17 14:51:24 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,24 @@ int	ft_len_tab(char **tab)
 	while (tab[i])
 		++i;
 	return (i);
+}
+
+char	*ft_my_strcpy(char *src, char *dst)
+{
+	size_t	i;
+	size_t	len;
+
+	if (!src)
+		return (NULL);
+	len = ft_strlen(src);
+	dst = ft_calloc(len + 1, sizeof(dst));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		++i;
+	}
+	return (dst);
 }

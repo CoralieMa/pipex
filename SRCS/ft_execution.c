@@ -1,25 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 14:25:49 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/20 12:11:26 by cmartino         ###   ########.fr       */
+/*   Created: 2023/03/17 16:00:20 by cmartino          #+#    #+#             */
+/*   Updated: 2023/03/20 11:59:29 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-t_pipex	ft_init(void)
+t_pipex	ft_cmd_execution(t_pipex data)
 {
-	t_pipex	data;
-
-	data.paths = NULL;
-	data.cmd = ft_calloc(sizeof(data.cmd), 3);
-	data.flags = ft_calloc(sizeof(data.flags), 3);
-	if (!data.cmd || !data.flags)
-		exit(0);
-	return (data);
+	
 }
+
+pipe() -> int[2]
+pid = fork();
+if (!pid) // child
+{
+	dup2(fichierin, STDIN_FILENO);
+	close(fichierin);
+	dup2(pipe[1], STDOUT_FILENO);
+	close(pipe[0])
+	close(pipe[1])
+	execve("/bin/ls" , [/bin/ls, -l, NULL], envp);
+	perror()
+	exit();
+}
+..
+
+fork()
+if (!pid)
+{
+	dup2(pipe[0], STDIN_FILENO);
+	close(pipe[0])
+	close(pipe[1])
+	dup2(fichierout, STDOUT_FILENO);
+	close(fichierout)
+}
+
+while ()
+	waitpid()
