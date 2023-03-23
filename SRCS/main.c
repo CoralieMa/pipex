@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:32:19 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/22 14:06:01 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:17:08 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int	main(int argc, char **argv, char **envp)
 		return (ft_exit(1));
 	data = ft_init(argv, envp);
 	data.paths = ft_get_envp_paths(envp);
-	data = ft_cmd_exist(argc, argv, data);
-	printf("%s\n%s\n", data.cmd[0], data.cmd[1]);
-	ft_cmd_execution(data);
-	ft_free(data);
-	// system("leaks pipex");
+	ft_cmd_exist(argc, argv, &data);
+	ft_cmd_execution(&data);
+	ft_free(&data);
+	system("leaks pipex");
 	return (0);
 }
+
+/* ameliorer ft_exit pour ne plus avoir de leaks*/
