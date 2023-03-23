@@ -6,13 +6,14 @@
 #    By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/01 11:14:48 by cmartino          #+#    #+#              #
-#    Updated: 2023/03/17 15:24:47 by cmartino         ###   ########.fr        #
+#    Updated: 2023/03/21 11:31:51 by cmartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= pipex
 
 FILES		= main \
+				ft_execution \
 				ft_utils \
 				ft_flags \
 				ft_cmds \
