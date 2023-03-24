@@ -6,7 +6,7 @@
 #    By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/01 11:14:48 by cmartino          #+#    #+#              #
-#    Updated: 2023/03/21 11:31:51 by cmartino         ###   ########.fr        #
+#    Updated: 2023/03/24 13:52:20 by cmartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS		= ${SRCS:.c=.o}
 
 CC 			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror# -fsanitize=address -g
 
 RM			= rm -f
 

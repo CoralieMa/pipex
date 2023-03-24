@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:21:02 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/23 17:15:21 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:29:55 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,4 @@ void	ft_free(t_pipex *data)
 		ft_free_all(data->paths);
 	if (data->cmd)
 		ft_free_all(data->cmd);
-	if (data->flags)
-		free(data->flags);
-	if (data->envp)
-		ft_free_all(data->envp);
-	if (data->infile)
-		free(data->infile);
 }

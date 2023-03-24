@@ -6,17 +6,19 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 09:49:04 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/23 12:42:07 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:43:04 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-int	ft_exit(int code)
+int	ft_exit(int err_code, t_pipex *data)
 {
-	if (code == 1)
+	if (err_code == 1)
 		write(1, "Wrong number of argument\n", 25);
-	else if (code == 2)
-		write(1, "Error : command not found\n", 26);
-	exit(0);
+	else if (err_code == 2)
+		write(1, "Error : malloc\n", 26);
+	if (data)
+		ft_free(data);
+	exit(EXIT_FAILURE);
 }

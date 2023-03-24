@@ -6,30 +6,30 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:34:38 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/23 15:51:40 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:18:59 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#include <stdio.h>
-#include <unistd.h>
+# include <stdio.h>
+# include <unistd.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include "../libft/libft.h"
 
-typedef	struct s_pipex {
+typedef	struct	s_pipex {
 	char	*infile;
 	char	*outfile;
 	char	**cmd;
 	char	**envp;
-	char	**flags;
+	char	*flags[3];
 	char	**paths;
 }				t_pipex;
 
-int		ft_exit(int code);
 int		ft_len_tab(char **tab);
+int		ft_exit(int code, t_pipex *data);
 char	*ft_get_flags(char *tab);
 char	*ft_my_strcpy(char *src, char *dst);
 char	**ft_get_envp_paths(char **envp);
