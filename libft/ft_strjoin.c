@@ -6,11 +6,12 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 11:59:45 by cmartino          #+#    #+#             */
-/*   Updated: 2022/10/28 09:35:56 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:10:26 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static char	*ft_one_string(char const *s)
 {

@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:32:30 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/02 14:41:54 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:47:06 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_len_tab(char const *s, char c)
 	return (cpt + 1);
 }
 
-char	**ft_free_all(char **tab, size_t j)
+static char	**ft_free_all(char **tab, size_t j)
 {
 	size_t	i;
 

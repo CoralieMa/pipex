@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:34:38 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/24 14:18:59 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:59:31 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/wait.h>
 # include "../libft/libft.h"
 
-typedef	struct	s_pipex {
+typedef struct s_pipex {
 	char	*infile;
 	char	*outfile;
 	char	**cmd;
@@ -29,7 +29,7 @@ typedef	struct	s_pipex {
 }				t_pipex;
 
 int		ft_len_tab(char **tab);
-int		ft_exit(int code, t_pipex *data);
+int		ft_exit(t_pipex *data, int err_code, int exit_stat, const char *funct);
 char	*ft_get_flags(char *tab);
 char	*ft_my_strcpy(char *src, char *dst);
 char	**ft_get_envp_paths(char **envp);
