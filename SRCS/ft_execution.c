@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:00:20 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/27 11:45:33 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:21:35 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_cmd_execution(t_pipex *data)
 	if (fdio[0] == -1)
 		perror(data->infile);
 	if (fd[0] == -1 || fd[1] == -1 || fdio[1] == -1)
-		ft_exit(data, 4, 0, __func__);
+		ft_exit(data, 4, EXIT_FAILURE, __func__);
 	pid1 = fork();
 	if (pid1 == 0)
 		ft_first_process(data, fd, fdio);

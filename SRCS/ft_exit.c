@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 09:49:04 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/27 11:43:43 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:26:12 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_exit(t_pipex *data, int err_code, int exit_stat, const char *funct)
 {
 	if (err_code == 1)
-		write(1, "Wrong number of argument\n", 25);
+		write(2, "Wrong number of argument\n", 25);
 	else if (err_code == 2)
 		perror(funct);
 	else if (err_code == 3)

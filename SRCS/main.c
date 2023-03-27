@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:32:19 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/24 13:55:19 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:33:58 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	data;
 
 	if (argc != 5)
-		return (0);
+		ft_exit(NULL, 1, EXIT_FAILURE, __func__);
 	data = ft_init(argv, envp);
 	data.paths = ft_get_envp_paths(envp);
 	ft_cmd_exist(argc, argv, &data);
