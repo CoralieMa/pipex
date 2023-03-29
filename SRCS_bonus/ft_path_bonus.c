@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit_bonus.c                                    :+:      :+:    :+:   */
+/*   ft_path_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 14:20:50 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/29 10:26:17 by cmartino         ###   ########.fr       */
+/*   Created: 2023/03/29 10:35:39 by cmartino          #+#    #+#             */
+/*   Updated: 2023/03/29 10:35:56 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes_bonus/pipex_bonus.h"
 
-int	ft_exit(t_pipex *data, int err_code, int exit_stat, const char *funct)
+char	**ft_get_envp_paths(char **envp)
 {
-	(void)data;
-	if (err_code == 1)
-		write(2, "Wrong number of argument\n", 25);
-	else if (err_code == 2)
-		perror(funct);
-	else if (err_code == 3)
-		perror(funct);
-	else if (err_code == 4)
-		perror(data->outfile);
-	// if (data)
-		// ft_free(data);
-	exit(exit_stat);
+	char	**paths;
+	int		i;
+
+	if (!envp)
+		return (NULL);
+	i = -1;
+	while (envp[++i])
+	{
+		if (!ft_strncmp("PATH", envp[i], 4))
+			paths = ft_split(&envp[i][5], ':');
+	}
+	return (paths);
 }

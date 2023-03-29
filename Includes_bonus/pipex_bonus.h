@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:21:55 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/27 14:23:50 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:13:39 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_pipex {
 	char	*outfile;
 	char	**cmd;
 	char	**envp;
-	char	*flags[3];
+	char	**flags;
 	char	**paths;
 }				t_pipex;
 
@@ -37,6 +37,6 @@ void	ft_free(t_pipex *data);
 void	ft_free_all(char **tab);
 void	ft_cmd_execution(t_pipex *data);
 void	ft_cmd_exist(int argc, char **argv, t_pipex *data);
-t_pipex	ft_init(char **argv, char **envp);
+t_pipex	ft_init(int argc, char **argv, char **envp);
 
 #endif
