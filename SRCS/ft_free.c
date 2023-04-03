@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:21:02 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/24 11:29:55 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:05:37 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void	ft_free_all(char **tab)
 	i = 0;
 	len = ft_len_tab(tab);
 	while (i < len)
-		free(tab[i++]);
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		++i;
+	}
 	free(tab);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:00:20 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/27 13:21:35 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:18:01 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	ft_last_process(t_pipex *data, int *fd, int *fdio)
 	dup2(fdio[1], STDOUT_FILENO);
 	close(fdio[1]);
 	execve(data->cmd[1], tab, data->envp);
-	perror(data->cmd[1]);
-	ft_exit(data, 4, EXIT_FAILURE, __func__);
+	ft_exit(data, 5, EXIT_FAILURE, data->cmd2);
 }
 
 void	ft_first_process(t_pipex *data, int *fd, int *fdio)
@@ -42,8 +41,7 @@ void	ft_first_process(t_pipex *data, int *fd, int *fdio)
 	close(fd[1]);
 	close(fd[0]);
 	execve(data->cmd[0], tab, data->envp);
-	perror(data->cmd[0]);
-	ft_exit(data, 4, EXIT_FAILURE, __func__);
+	ft_exit(data, 5, EXIT_FAILURE, data->cmd1);
 }
 
 void	ft_waitpid(int pid1, int pid2, t_pipex *data)
@@ -54,12 +52,12 @@ void	ft_waitpid(int pid1, int pid2, t_pipex *data)
 	if (waitpid(pid1, &status1, 0) == -1)
 	{
 		perror("waitpid");
-		ft_exit(data, 3, WEXITSTATUS(status1), __func__);
+		ft_exit(data, 2, WEXITSTATUS(status1), __func__);
 	}
 	if (waitpid(pid2, &status2, 0) == -1)
 	{
 		perror("waitpid");
-		ft_exit(data, 3, WEXITSTATUS(status2), __func__);
+		ft_exit(data, 2, WEXITSTATUS(status2), __func__);
 	}
 }
 

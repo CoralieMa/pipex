@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 09:38:28 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/27 13:22:00 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:48:51 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	ft_free_ft_cmd(char **tab, char *cmd)
 		ft_free_all(tab);
 	if (cmd)
 		free(cmd);
+	cmd = NULL;
 }
 
 static int	ft_input_exist(t_pipex *data, char *cmd, int i)
@@ -57,15 +58,19 @@ int	ft_test_cmd(t_pipex *data, char *cmd, int i, int j)
 	return (ok);
 }
 
-void	ft_cmd_exist(int argc, char **argv, t_pipex *data)
+// void	ft_test(t_pipex *data, int j)
+// {
+// 	free(data->cmd[j]);
+// 	data->cmd[j] = NULL;
+// }
+
+void	ft_cmd_exist(int argc, char **argv, t_pipex *data, int j)
 {
 	char	**tab;
 	char	*cmd;
 	int		i;
-	int		j;
 	int		ok;
 
-	j = -1;
 	while (++j < argc - 3)
 	{
 		tab = get_cmd(argv[j + 2], data);
@@ -73,14 +78,16 @@ void	ft_cmd_exist(int argc, char **argv, t_pipex *data)
 		if (!cmd)
 			ft_exit(data, 2, EXIT_FAILURE, __func__);
 		data->flags[j] = ft_get_flags(argv[j + 2]);
-		i = 0;
+		i = -1;
 		ok = ft_input_exist(data, argv[j + 2], j);
-		while (data->paths[i] && ok != 1)
+		while (data->paths[++i] && ok != 1)
 		{
 			ok = ft_test_cmd(data, cmd, i, j);
 			if (!ok)
+			{
 				free(data->cmd[j]);
-			++i;
+				data->cmd[j] = NULL;
+			}
 		}
 		ft_free_ft_cmd(tab, cmd);
 	}
