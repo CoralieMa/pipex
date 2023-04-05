@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:58:40 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/05 15:34:27 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:34:48 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ typedef struct s_pipex {
 	char	*outfile;
 	char	**argv;
 	char	**envp;
-	char	**paths;
 	char	**cmds;
+	char	**paths;
+	char	***flags;
 }				t_pipex;
 
 int		ft_len_tab(char **tab);
