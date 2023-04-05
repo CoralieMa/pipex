@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 11:34:38 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/03 12:47:30 by cmartino         ###   ########.fr       */
+/*   Created: 2023/04/04 12:58:40 by cmartino          #+#    #+#             */
+/*   Updated: 2023/04/05 15:34:27 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,23 @@
 # include "../libft/libft.h"
 
 typedef struct s_pipex {
+	int		argc;
 	char	*infile;
 	char	*outfile;
-	char	*cmd1;
-	char	*cmd2;
-	char	**cmd;
+	char	**argv;
 	char	**envp;
-	char	*flags[3];
 	char	**paths;
+	char	**cmds;
 }				t_pipex;
 
 int		ft_len_tab(char **tab);
-int		ft_exit(t_pipex *data, int err_code, int exit_stat, const char *funct);
-char	*ft_get_flags(char *tab);
-char	*ft_my_strcpy(char *src, char *dst);
 char	**ft_get_envp_paths(char **envp);
 void	ft_free(t_pipex *data);
-void	ft_free_all(char **tab);
-void	ft_cmd_execution(t_pipex *data);
-void	ft_cmd_exist(int argc, char **argv, t_pipex *data, int j);
-t_pipex	ft_init(char **argv, char **envp);
+void	ft_free_all(char **tab, int len);
+void	ft_cmd_exist(t_pipex *data);
+void	ft_execution(t_pipex *data);
+void	ft_pipe(t_pipex *data, int (*fd)[2]);
+void	ft_exit(t_pipex *data, int type_err, const char *funct);
+t_pipex	ft_init_data(int argc, char **argv, char **envp);
 
 #endif

@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:21:02 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/03 12:05:37 by cmartino         ###   ########.fr       */
+/*   Created: 2023/04/04 12:59:16 by cmartino          #+#    #+#             */
+/*   Updated: 2023/04/05 12:31:26 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-void	ft_free_all(char **tab)
+int	ft_len_tab(char **tab)
 {
 	int	i;
-	int	len;
 
+	if (!tab)
+		return (0);
 	i = 0;
-	len = ft_len_tab(tab);
-	while (i < len)
-	{
-		free(tab[i]);
-		tab[i] = NULL;
+	while (tab[i])
 		++i;
-	}
-	free(tab);
+	return (i);
 }
 
-void	ft_free(t_pipex *data)
+void	ft_pipe(t_pipex *data, int (*fd)[2])
 {
-	if (data->paths)
-		ft_free_all(data->paths);
-	if (data->cmd)
-		ft_free_all(data->cmd);
+	pipe(*fd);
+	if (*fd[0] == -1 || *fd[1] == -1)
+		ft_exit(data, 4, __func__);
 }

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_flags.c                                         :+:      :+:    :+:   */
+/*   get_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 13:14:04 by cmartino          #+#    #+#             */
-/*   Updated: 2023/03/17 15:01:38 by cmartino         ###   ########.fr       */
+/*   Created: 2023/04/04 15:02:54 by cmartino          #+#    #+#             */
+/*   Updated: 2023/04/04 15:04:39 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-char	*ft_get_flags(char *tab)
+char	**ft_get_envp_paths(char **envp)
 {
-	int	i;
+	char	**paths;
+	int		i;
 
-	i = 0;
-	while (tab[i] != ' ' && tab[i])
-		++i;
-	while (tab[i] == ' ' && tab[i])
-		++i;
-	if (tab[i])
-		return (&tab[i]);
-	return (NULL);
+	if (!envp)
+		return (NULL);
+	i = -1;
+	paths = NULL;
+	while (envp[++i])
+	{
+		if (!ft_strncmp("PATH", envp[i], 4))
+			paths = ft_split(&envp[i][5], ':');
+	}
+	return (paths);
 }

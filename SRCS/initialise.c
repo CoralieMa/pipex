@@ -1,45 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   initialise.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/02 14:50:50 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/03 12:36:37 by cmartino         ###   ########.fr       */
+/*   Created: 2023/04/04 14:48:00 by cmartino          #+#    #+#             */
+/*   Updated: 2023/04/05 15:24:46 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-int	ft_len_tab(char **tab)
+t_pipex	ft_init_data(int argc, char **argv, char **envp)
 {
-	int	i;
+	t_pipex	data;
 
-	if (!tab)
-		return (0);
-	i = 0;
-	while (tab[i])
-		++i;
-	return (i);
-}
-
-char	*ft_my_strcpy(char *src, char *dst)
-{
-	size_t	i;
-	size_t	len;
-
-	if (!src)
-		return (NULL);
-	len = ft_strlen(src);
-	dst = ft_calloc(len + 1, sizeof(dst));
-	if (!dst)
-		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		dst[i] = src[i];
-		++i;
-	}
-	return (dst);
+	data.argc = argc;
+	data.argv = argv;
+	data.envp = envp;
+	data.infile = argv[1];
+	data.outfile = argv[argc -1];
+	data.paths = ft_get_envp_paths(envp);
+	if (!data.paths)
+		ft_exit(&data, 2, __func__);
+	data.cmds = ft_calloc(sizeof(data.cmds), argc - 3);
+	if (!data.cmds)
+		ft_exit(&data, 3, __func__);
+	return (data);
 }
