@@ -6,24 +6,37 @@
 #    By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/04 12:57:02 by cmartino          #+#    #+#              #
-#    Updated: 2023/04/07 14:59:31 by cmartino         ###   ########.fr        #
+#    Updated: 2023/04/11 15:11:33 by cmartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= pipex
 
 FILES		= main \
-				utils \
+				free \
 				cmds \
 				exit \
-				free \
+				utils \
 				execution \
 				get_paths \
 				initialise
 
+FILES_BONUS	= main_bonus \
+				free_bonus \
+				cmds_bonus \
+				exit_bonus \
+				utils_bonus \
+				execution_bonus \
+				get_paths_bonus \
+				initialise_bonus
+
 SRCS		= ${addprefix SRCS/, $(addsuffix .c, $(FILES))}
 
+SRCS_BONUS	= ${addprefix SRCS_bonus/, $(addsuffix .c, $(FILES_BONUS))}
+
 OBJS		= ${SRCS:.c=.o}
+
+OBJS_BONUS	= ${SRCS_BONUS:.c=.o}
 
 CC 			= gcc
 
@@ -56,6 +69,9 @@ fclean:	clean
 	${RM} ${LIB_PATH}${DEP}
 	${RM} ${NAME}
 
+bonus:	${DEP} ${OBJS_BONUS}
+	${CC} ${CFLAGS} ${OBJS_BONUS} -o ${NAME} ${DEP}
+
 re:	fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:	all clean fclean re bonus

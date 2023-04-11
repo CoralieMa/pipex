@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 12:59:16 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/11 10:29:07 by cmartino         ###   ########.fr       */
+/*   Created: 2023/04/07 15:20:13 by cmartino          #+#    #+#             */
+/*   Updated: 2023/04/11 15:50:51 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../Includes/pipex_bonus.h"
 
 int	ft_len_tab(char **tab)
 {
@@ -24,15 +24,10 @@ int	ft_len_tab(char **tab)
 	return (i);
 }
 
-void	ft_pipe(t_pipex *data, int (*fd)[2])
+void	ft_pipe(t_pipex *data)
 {
-	int	tmp[2];
-	int	check;
-
-	check = pipe(tmp);
-	(*fd)[0] = tmp[0];
-	(*fd)[1] = tmp[1];
-	if ((*fd)[0] == -1 || (*fd)[1] == -1)
+	pipe(data->fd);
+	if (data->fd[0] == -1 || data->fd[1] == -1)
 		ft_exit(data, 4, __func__);
 }
 

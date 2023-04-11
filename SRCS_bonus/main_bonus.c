@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 12:59:04 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/11 15:31:33 by cmartino         ###   ########.fr       */
+/*   Created: 2023/04/07 15:20:04 by cmartino          #+#    #+#             */
+/*   Updated: 2023/04/11 15:39:35 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
-
-// note -> proeteger strdup -> proteger dup2 -> proteger close
+#include "../Includes/pipex_bonus.h"
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -20,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	int		ret_value;
 	int		fdio[2];
 
-	if (argc != 5)
+	if (argc < 5)
 		ft_exit(NULL, 1, __func__);
 	data = ft_init_data(argc, argv, envp);
 	ft_open_files(&data, fdio);
