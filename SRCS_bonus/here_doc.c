@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 14:26:11 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/12 15:17:09 by cmartino         ###   ########.fr       */
+/*   Created: 2023/04/12 10:28:23 by cmartino          #+#    #+#             */
+/*   Updated: 2023/04/12 14:22:43 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../Includes/pipex_bonus.h"
 
-void	ft_exit(t_pipex *data, int type_err, const char *funct)
+void	ft_here_doc(char **argv)
 {
-	if (type_err == 1)
+	int		fdi;
+	int		len;
+	char	*line;
+
+	len = ft_strlen(argv[2]);
+	fdi = open("infile", O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	line = get_next_line(0);
+	while (ft_strncmp(argv[2], line, len))
 	{
-		write(2, "Wrong number of argument\n", 25);
-		exit(EXIT_FAILURE);
+		write(fdi, line, ft_strlen(line));
+		free(line);
+		line = get_next_line(0);
 	}
-	ft_free(data);
-	if (type_err == 2)
-		perror(funct);
-	else if (type_err == 3)
-		exit(127);
-	else if (type_err == 4)
-		exit(128);
-	exit(EXIT_FAILURE);
+	free(line);
+	free(get_next_line(-42));
+	close(fdi);
 }

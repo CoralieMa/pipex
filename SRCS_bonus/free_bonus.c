@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:22:26 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/11 10:37:50 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/12 10:20:21 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void	ft_free_all(char **tab, int len)
 	int	i;
 
 	i = 0;
-	while (i < len && tab[i])
+	while (i < len)
 	{
-		free(tab[i]);
-		tab[i] = NULL;
+		if (tab[i])
+		{
+			free(tab[i]);
+			tab[i] = NULL;
+		}
 		++i;
 	}
 	free(tab);
@@ -34,11 +37,7 @@ void	ft_free(t_pipex *data)
 	if (data->paths)
 		ft_free_all(data->paths, ft_len_tab(data->paths));
 	if (data->cmds)
-	{
-		if (!data->cmds[0] && data->cmds[1])
-			free(data->cmds[1]);
 		ft_free_all(data->cmds, data->argc - 3);
-	}
 	i = 0;
 	if (data->flags)
 	{

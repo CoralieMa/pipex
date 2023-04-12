@@ -6,7 +6,7 @@
 #    By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/04 12:57:02 by cmartino          #+#    #+#              #
-#    Updated: 2023/04/11 15:11:33 by cmartino         ###   ########.fr        #
+#    Updated: 2023/04/12 15:18:54 by cmartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,12 @@ FILES_BONUS	= main_bonus \
 				cmds_bonus \
 				exit_bonus \
 				utils_bonus \
+				here_doc \
 				execution_bonus \
 				get_paths_bonus \
-				initialise_bonus
+				initialise_bonus \
+				get_next_line \
+				get_next_line_utils
 
 SRCS		= ${addprefix SRCS/, $(addsuffix .c, $(FILES))}
 

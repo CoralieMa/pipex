@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_bonus.c                                       :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/07 15:22:04 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/12 15:16:57 by cmartino         ###   ########.fr       */
+/*   Created: 2022/11/02 09:28:53 by cmartino          #+#    #+#             */
+/*   Updated: 2023/04/12 11:53:48 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex_bonus.h"
 
-void	ft_exit(t_pipex *data, int type_err, const char *funct)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
-	if (type_err == 1)
+	char	*str;
+	int		i;
+	int		j;
+	int		size;
+
+	if (!s1 || !s2)
+		return (NULL);
+	size = ft_strlen(s1) + ft_strlen(s2);
+	str = (char *)malloc(sizeof(char) * (size + 1));
+	if (!str)
 	{
-		write(2, "Wrong number of argument\n", 25);
-		exit(EXIT_FAILURE);
+		free(s1);
+		return (NULL);
 	}
-	ft_free(data);
-	if (type_err == 2)
-		perror(funct);
-	else if (type_err == 3)
-		exit(127);
-	else if (type_err == 4)
-		exit(128);
-	exit(EXIT_FAILURE);
+	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
+	free(s1);
+	j = 0;
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[size] = '\0';
+	return (str);
 }

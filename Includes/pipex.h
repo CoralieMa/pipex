@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:58:40 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/11 10:29:35 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:06:51 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		ft_len_tab(char **tab);
 char	**ft_get_envp_paths(char **envp);
 void	ft_free(t_pipex *data);
 void	ft_notfound(char *str);
+void	ft_close(int fd, t_pipex *data);
 void	ft_free_all(char **tab, int len);
 void	ft_pipe(t_pipex *data, int (*fd)[2]);
 void	ft_cmd_exist(t_pipex *data, int fdio[2]);

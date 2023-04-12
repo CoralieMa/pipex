@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 15:17:01 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/07 15:13:12 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:29:59 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	ft_get_cmd(t_pipex *data)
 		if (!tab)
 			ft_exit(data, 2, __func__);
 		data->cmds[i] = ft_strdup(tab[0]);
+		if (tab[0])
+			ft_exit(data, 2, __func__);
 		ft_get_flag(data, tab, i);
 		ft_free_all(tab, ft_len_tab(tab));
 		tab = NULL;
@@ -78,6 +80,8 @@ void	ft_fct(t_pipex *data, int i)
 	{
 		free(data->flags[i][0]);
 		data->flags[i][0] = ft_strdup(data->cmds[i]);
+		if (!data->flags[i][0])
+			ft_exit(data, 2, __func__);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:20:13 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/11 15:50:51 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:10:22 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_get_flag(t_pipex *data, char **tab, int i)
 	while (tab[j])
 	{
 		data->flags[i][j] = ft_strdup(tab[j]);
+		if (!data->flags[i][j])
+			ft_exit(data, 2, __func__);
 		++j;
 	}
 }
@@ -57,7 +59,10 @@ void	ft_get_flag(t_pipex *data, char **tab, int i)
 void	ft_open_files(t_pipex *data, int fdio[2])
 {
 	fdio[0] = open(data->infile, O_RDONLY);
-	fdio[1] = open(data->outfile, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (data->hd == 1)
+		fdio[1] = open(data->outfile, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	else
+		fdio[1] = open(data->outfile, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fdio[0] == -1)
 		perror(data->infile);
 	if (fdio[1] == -1)
