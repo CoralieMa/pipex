@@ -6,11 +6,26 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:26:11 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/12 15:17:09 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:43:41 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
+
+void	ft_close(int fd)
+{
+	if (close(fd) == -1)
+		perror(__func__);
+}
+
+void	ft_dup2(t_pipex *data, int *pids, int fd, int input)
+{
+	if (dup2(fd, input) == -1)
+	{
+		free(pids);
+		ft_exit(data, 2, __func__);
+	}
+}
 
 void	ft_exit(t_pipex *data, int type_err, const char *funct)
 {

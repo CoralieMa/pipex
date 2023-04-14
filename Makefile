@@ -6,7 +6,7 @@
 #    By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/04 12:57:02 by cmartino          #+#    #+#              #
-#    Updated: 2023/04/12 15:18:54 by cmartino         ###   ########.fr        #
+#    Updated: 2023/04/13 10:49:21 by cmartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ FILES_BONUS	= main_bonus \
 				cmds_bonus \
 				exit_bonus \
 				utils_bonus \
-				here_doc \
+				here_doc_bonus \
 				execution_bonus \
 				get_paths_bonus \
 				initialise_bonus \
@@ -43,7 +43,7 @@ OBJS_BONUS	= ${SRCS_BONUS:.c=.o}
 
 CC 			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror# -fsanitize=address -g
+CFLAGS		= -Wall -Wextra -Werror
 
 RM			= rm -f
 

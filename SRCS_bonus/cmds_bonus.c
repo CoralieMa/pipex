@@ -6,13 +6,11 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:56:49 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/12 15:22:09 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:14:07 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex_bonus.h"
-
-// valgrind --leak-check=full --track-origins=yes
 
 static void	ft_get_cmd(t_pipex *data)
 {
@@ -26,8 +24,6 @@ static void	ft_get_cmd(t_pipex *data)
 		if (!tab)
 			ft_exit(data, 2, __func__);
 		data->cmds[i] = ft_strdup(tab[0]);
-		if (!data->cmds[i])
-			ft_exit(data, 2, __func__);
 		ft_get_flag(data, tab, i);
 		ft_free_all(tab, ft_len_tab(tab));
 		tab = NULL;
@@ -82,8 +78,6 @@ void	ft_fct(t_pipex *data, int i)
 	{
 		free(data->flags[i][0]);
 		data->flags[i][0] = ft_strdup(data->cmds[i]);
-		if (!data->flags[i][0])
-			ft_exit(data, 2, __func__);
 	}
 }
 

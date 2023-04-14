@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 10:29:56 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/12 15:22:47 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:44:21 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void	ft_first_cmd(t_pipex *data, int fd[2], int fdio[2], int *pids)
 	{
 		if (fdio[0] == -1 || !data->cmds[0])
 			ft_exit(data, 0, __func__);
-		dup2(fdio[0], STDIN_FILENO);
-		close(fdio[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		close(fd[0]);
+		ft_dup2(data, pids, fdio[0], STDIN_FILENO);
+		ft_close(fdio[0]);
+		ft_dup2(data, pids, fd[1], STDOUT_FILENO);
+		ft_close(fd[1]);
+		ft_close(fd[0]);
 		execve(data->cmds[0], data->flags[0], data->envp);
 		ft_exit(data, 2, data->cmds[0]);
 	}
@@ -36,10 +36,10 @@ static void	ft_last_cmd(t_pipex *data, int fd[2], int fdio[2], int *pids)
 	{
 		if (!data->cmds[1])
 			ft_exit(data, 3, __func__);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		dup2(fdio[1], STDOUT_FILENO);
-		close(fdio[1]);
+		ft_dup2(data, pids, fd[0], STDIN_FILENO);
+		ft_close(fd[0]);
+		ft_dup2(data, pids, fdio[1], STDOUT_FILENO);
+		ft_close(fdio[1]);
 		execve(data->cmds[1], data->flags[1], data->envp);
 		ft_exit(data, 2, data->cmds[1]);
 	}
@@ -73,11 +73,11 @@ void	ft_execution(t_pipex *data, int *ret_value, int fdio[2])
 		ft_exit(data, 41, __func__);
 	ft_pipe(data, &fd);
 	ft_first_cmd(data, fd, fdio, pids);
-	close(fdio[0]);
-	close(fd[1]);
+	ft_close(fdio[0]);
+	ft_close(fd[1]);
 	ft_last_cmd(data, fd, fdio, pids);
-	close(fdio[1]);
-	close(fd[0]);
+	ft_close(fdio[1]);
+	ft_close(fd[0]);
 	ft_waitpids(data, pids, ret_value);
 	free(pids);
 	pids = NULL;

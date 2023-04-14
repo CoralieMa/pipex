@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:20:13 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/12 15:10:22 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:14:16 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	ft_get_flag(t_pipex *data, char **tab, int i)
 	while (tab[j])
 	{
 		data->flags[i][j] = ft_strdup(tab[j]);
-		if (!data->flags[i][j])
-			ft_exit(data, 2, __func__);
 		++j;
 	}
 }
