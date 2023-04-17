@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:58:40 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/14 09:45:29 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:44:55 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_pipe(t_pipex *data, int (*fd)[2]);
 void	ft_cmd_exist(t_pipex *data, int fdio[2]);
 void	ft_open_files(t_pipex *data, int fdio[2]);
 void	ft_get_flag(t_pipex *data, char **tab, int i);
-void	ft_dup2(t_pipex *data, int *pids, int fd, int input);
+void	ft_dup2(t_pipex *data, int fd, int input);
 void	ft_execution(t_pipex *data, int *ret_value, int fdio[2]);
 void	ft_exit(t_pipex *data, int type_err, const char *funct);
 t_pipex	ft_init_data(int argc, char **argv, char **envp);

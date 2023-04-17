@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:22:04 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/14 09:47:20 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/17 10:55:18 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@ void	ft_close(int fd)
 		perror(__func__);
 }
 
-void	ft_dup2(t_pipex *data, int *pids, int fd, int input)
+void	ft_dup2(t_pipex *data, int fd, int input)
 {
 	if (dup2(fd, input) == -1)
-	{
-		free(pids);
 		ft_exit(data, 2, __func__);
-	}
 }
 
 void	ft_exit(t_pipex *data, int type_err, const char *funct)

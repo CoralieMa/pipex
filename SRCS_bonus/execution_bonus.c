@@ -6,22 +6,24 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:21:36 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/14 09:46:44 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:56:39 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex_bonus.h"
 
-static void	ft_first_cmd(t_pipex *data, int fdio[2], int *pids)
+static void	ft_first_cmd(t_pipex *data, int fdio[2])
 {
-	pids[0] = fork();
-	if (pids[0] == 0)
+	data->pids[0] = fork();
+	if (data->pids[0] == -1)
+		ft_exit(data, 2, __func__);
+	if (data->pids[0] == 0)
 	{
 		if (fdio[0] == -1 || !data->cmds[0])
 			ft_exit(data, 0, __func__);
-		ft_dup2(data, pids, fdio[0], STDIN_FILENO);
+		ft_dup2(data, fdio[0], STDIN_FILENO);
 		ft_close(fdio[0]);
-		ft_dup2(data, pids, data->fd[1], STDOUT_FILENO);
+		ft_dup2(data, data->fd[1], STDOUT_FILENO);
 		ft_close(data->fd[1]);
 		ft_close(data->fd[0]);
 		execve(data->cmds[0], data->flags[0], data->envp);
@@ -29,18 +31,20 @@ static void	ft_first_cmd(t_pipex *data, int fdio[2], int *pids)
 	}
 }
 
-static void	ft_middle_cmd(t_pipex *data, int fdio[2], int *pids, int i)
+static void	ft_middle_cmd(t_pipex *data, int fdio[2], int i)
 {
 	ft_pipe(data);
-	pids[i] = fork();
-	if (pids[i] == 0)
+	data->pids[i] = fork();
+	if (data->pids[i] == -1)
+		ft_exit(data, 2, __func__);
+	if (data->pids[i] == 0)
 	{
 		if (!data->cmds[i])
 			ft_exit(data, 3, __func__);
-		ft_dup2(data, pids, fdio[0], STDIN_FILENO);
+		ft_dup2(data, fdio[0], STDIN_FILENO);
 		ft_close(fdio[0]);
 		ft_close(fdio[1]);
-		ft_dup2(data, pids, data->fd[1], STDOUT_FILENO);
+		ft_dup2(data, data->fd[1], STDOUT_FILENO);
 		ft_close(data->fd[0]);
 		ft_close(data->fd[1]);
 		execve(data->cmds[i], data->flags[i], data->envp);
@@ -48,23 +52,25 @@ static void	ft_middle_cmd(t_pipex *data, int fdio[2], int *pids, int i)
 	}
 }
 
-static void	ft_last_cmd(t_pipex *data, int fdio[2], int *pids, int i)
+static void	ft_last_cmd(t_pipex *data, int fdio[2], int i)
 {
-	pids[i] = fork();
-	if (pids[i] == 0)
+	data->pids[i] = fork();
+	if (data->pids[i] == -1)
+		ft_exit(data, 2, __func__);
+	if (data->pids[i] == 0)
 	{
 		if (!data->cmds[i])
 			ft_exit(data, 3, __func__);
-		ft_dup2(data, pids, data->fd[0], STDIN_FILENO);
+		ft_dup2(data, data->fd[0], STDIN_FILENO);
 		ft_close(data->fd[0]);
-		ft_dup2(data, pids, fdio[1], STDOUT_FILENO);
+		ft_dup2(data, fdio[1], STDOUT_FILENO);
 		ft_close(fdio[1]);
 		execve(data->cmds[i], data->flags[i], data->envp);
 		ft_exit(data, 2, data->cmds[i]);
 	}
 }
 
-static void	ft_waitpids(t_pipex *data, int *pids, int *ret_value)
+static void	ft_waitpids(t_pipex *data, int *ret_value)
 {
 	int	status;
 	int	i;
@@ -72,7 +78,7 @@ static void	ft_waitpids(t_pipex *data, int *pids, int *ret_value)
 	i = 0;
 	while (i < data->argc - 3)
 	{
-		if (waitpid(pids[i], &status, 0) == -1)
+		if (waitpid(data->pids[i], &status, 0) == -1)
 		{
 			perror("waitpid");
 			ft_exit(data, WEXITSTATUS(status), __func__);
@@ -84,28 +90,23 @@ static void	ft_waitpids(t_pipex *data, int *pids, int *ret_value)
 
 void	ft_execution(t_pipex *data, int *ret_value, int fdio[2])
 {
-	int	*pids;
 	int	i;
 
-	pids = ft_calloc(sizeof(int), data->argc - 3);
-	if (!pids)
-		ft_exit(data, 41, __func__);
 	ft_pipe(data);
-	ft_first_cmd(data, fdio, pids);
-	ft_close(fdio[0]);
+	ft_first_cmd(data, fdio);
+	if (fdio[0] != -1)
+		ft_close(fdio[0]);
 	ft_close(data->fd[1]);
 	i = 0;
 	while (++i < data->argc - 4)
 	{
 		fdio[0] = data->fd[0];
-		ft_middle_cmd(data, fdio, pids, i);
+		ft_middle_cmd(data, fdio, i);
 		ft_close(fdio[0]);
 		ft_close(data->fd[1]);
 	}
-	ft_last_cmd(data, fdio, pids, i);
+	ft_last_cmd(data, fdio, i);
 	ft_close(fdio[1]);
 	ft_close(data->fd[0]);
-	ft_waitpids(data, pids, ret_value);
-	free(pids);
-	pids = NULL;
+	ft_waitpids(data, ret_value);
 }

@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:23:10 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/12 14:25:30 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:04:30 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ t_pipex	ft_init_data_here_doc(int argc, char **argv, char **envp)
 	data.flags = ft_calloc(sizeof(data.flags), argc - 3);
 	if (!data.flags)
 		ft_exit(&data, 2, __func__);
+	data.pids = ft_calloc(sizeof(int), data.argc - 3);
+	if (!data.pids)
+		ft_exit(&data, 2, __func__);
 	return (data);
 }
 
@@ -69,6 +72,9 @@ t_pipex	ft_init_data(int argc, char **argv, char **envp)
 		ft_exit(&data, 2, __func__);
 	data.flags = ft_calloc(sizeof(data.flags), argc - 3);
 	if (!data.flags)
+		ft_exit(&data, 2, __func__);
+	data.pids = ft_calloc(sizeof(int), data.argc - 3);
+	if (!data.pids)
 		ft_exit(&data, 2, __func__);
 	return (data);
 }

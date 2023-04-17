@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:22:26 by cmartino          #+#    #+#             */
-/*   Updated: 2023/04/12 10:20:21 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/04/17 10:47:42 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	ft_free(t_pipex *data)
 		free(data->flags);
 		data->flags = NULL;
 	}
+	free(data->pids);
 }
